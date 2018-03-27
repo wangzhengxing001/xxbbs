@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>XXBBS后台管理系统</title>
-		<meta charset="utf-8">
-		<link href="{{ url_for("static", filename="cms/css/style.css") }}" rel='stylesheet' type='text/css' />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		<!--webfonts-->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
-		<!--//webfonts-->
+<title>XXBBS后台管理系统</title>
+<link href="{{ url_for("static", filename="css/style.css") }}" rel='stylesheet' type='text/css'/>
+<!--webfonts-->
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,800' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
 </head>
 <body>
-	 <!-----start-main---->
-	 <div class="main">
-		<div class="login-form">
-			<h1>登陆</h1>
-					<div class="head">
-						<img src="{{ url_for("static", filename="cms/images/user.png") }}" alt=""/>
-					</div>
-				<form action="" method="post">
-						<input type="text" class="text" value="邮箱/用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '邮箱/用户名';}" name="email">
-						<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" name="password">
-                        <input type="checkbox" value="1" name="remember"> 记住我
-						<div class="submit">
-                            <input type="submit" onclick="myFunction()" value="立即登陆" >
-					    </div>
-					<!-- <p><a href="#">Forgot Password ?</a></p> -->
+ <!--start-main-->
+	<div class="login-07">
+		<div class="seventh-login">
+			<h3>请登陆</h3>
+			<form class="seven" method="post" action="">
+				<ul>
+					<li>
+						<input type="text"   placeholder="用户名" required name="email"/>
+						<a href="#" class="icon8 star"></a>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<input type="password"   placeholder="密码" required name="password"/>
+						<a href="#" class="icon8 star"></a>
+						<div class="clear"></div>
+					</li>
+                    <input type="checkbox"  name="remember" value="1"/> &nbsp;记住我
+					<input type="submit" value="登陆" >
                     {% if message %}
-                        <p style="text-align: center; color:indianred;">{{ message }}</p>
+                        <h4 class="text-danger">{{ message }}</h4>
                     {% endif %}
-				</form>
-			</div>
-			<!--//End-login-form-->
+                </ul>
+			</form>
 		</div>
-			 <!-----//end-main---->
+	</div>
 </body>
 </html>
