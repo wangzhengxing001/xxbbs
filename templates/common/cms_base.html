@@ -1,0 +1,31 @@
+{% from "common/macros.html" import file_name%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    {% block head %}
+        {% block title %}
+        {% endblock %}
+    {% endblock %}
+	<meta name="renderer" content="webkit">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" href="{{ file_name("cms/common/layui/css/layui.css") }}" media="all">
+	<link rel="stylesheet" type="text/css" href="{{ file_name("cms/common/global.css") }}" media="all">
+	<link rel="stylesheet" type="text/css" href="{{ file_name("cms/css/adminstyle.css") }}" media="all">
+    <!-- load js -->
+    <script type="text/javascript" src="{{ file_name("cms/common/layui/layui.js") }}"></script>
+    <script type="text/javascript" src="{{ file_name("cms/js/navtab.js") }}"></script>
+    <script type="text/javascript" src="{{ file_name("cms/js/jquery-3.3.1.js") }}"></script>
+</head>
+<body>
+{% block body %}
+{% endblock %}
+{% block foot %}
+{% endblock %}
+</body>
