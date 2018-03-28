@@ -1,0 +1,83 @@
+{% extends "common/cms_base.html" %}
+{% block head %}
+    {% block  title%}
+        <title>个人信息</title>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ file_name("cms/common/bootstrap/css/bootstrap.css") }}" media="all">
+    <link rel="stylesheet" type="text/css" href="{{ file_name("cms/css/personal.css") }}" media="all">
+{% endblock %}
+{% block body %}
+    <section class="layui-larry-box">
+        <div class="larry-personal">
+            <header class="larry-personal-tit">
+                <span>个人信息</span>
+            </header><!-- /header -->
+            <div class="larry-personal-body clearfix">
+                <form class="layui-form col-lg-5" action="" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="{{ g.cms_user.email }}" disabled="disabled" >
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属角色</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username"  autocomplete="off" class="layui-input layui-disabled" value="超级管理员" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">真实姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username"  autocomplete="off" class="layui-input" value="{{ g.cms_user.username }}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">加入时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username"  autocomplete="off" value="{{ g.cms_user.join_time }}" class="layui-input" placeholder="输入手机号码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="男" title="男" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>男</span></div>
+                            <input type="radio" name="sex" value="女" title="女"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><span>女</span></div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">修改头像</label>
+                        <div class="layui-input-block">
+                            <input type="file" name="file" class="layui-upload-file">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">个性签名</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="{{ g.cms_user.signature }}" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        layui.use(['form','upload'],function(){
+             var form = layui.form();
+             layui.upload({
+                 url: '' ,//上传接口
+                 success: function(res){
+                  //上传成功后的回调
+                  console.log(res)
+                }
+             });
+        });
+    </script>
+{% endblock %}

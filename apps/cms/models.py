@@ -1,5 +1,6 @@
 from exts import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 
 class CMSUser(db.Model):
@@ -8,6 +9,8 @@ class CMSUser(db.Model):
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     _password = db.Column(db.String(200), nullable=False)
+    join_time = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    signature = db.Column(db.String(200), default="此人很懒，什么都没有留下!", nullable=False)
 
     def __init__(self, username, password, email):
         self.password = password

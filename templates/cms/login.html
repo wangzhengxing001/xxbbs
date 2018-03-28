@@ -1,38 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>XXBBS后台管理系统</title>
-<link href="{{ url_for("static", filename="css/style.css") }}" rel='stylesheet' type='text/css'/>
-<!--webfonts-->
-		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,800' rel='stylesheet' type='text/css'>
-<!--//webfonts-->
-</head>
-<body>
- <!--start-main-->
-	<div class="login-07">
-		<div class="seventh-login">
-			<h3>请登陆</h3>
-			<form class="seven" method="post" action="">
-				<ul>
-					<li>
-						<input type="text"   placeholder="用户名" required name="email"/>
-						<a href="#" class="icon8 star"></a>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<input type="password"   placeholder="密码" required name="password"/>
-						<a href="#" class="icon8 star"></a>
-						<div class="clear"></div>
-					</li>
-                    <input type="checkbox"  name="remember" value="1"/> &nbsp;记住我
-					<input type="submit" value="登陆" >
-                    {% if message %}
-                        <h4 class="text-danger">{{ message }}</h4>
-                    {% endif %}
-                </ul>
-			</form>
-		</div>
-	</div>
-</body>
-</html>
+{% extends "common/cms_base.html" %}
+{% from "common/macros.html" import file_name %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ file_name("cms/css/login.css") }}" media="all">
+{% endblock %}
+{% block body %}
+    <div class="layui-canvs"></div>
+    <div class="layui-layout layui-layout-login">
+        <h1>
+             <strong>CMS管理系统后台</strong>
+        </h1>
+        <form action="" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="layui-user-icon larry-login">
+                 <input type="text" placeholder="账号" class="login_txtbx" name="email"/>
+            </div>
+            <div class="layui-pwd-icon larry-login">
+                 <input type="password" placeholder="密码" class="login_txtbx" name="password"/>
+            </div>
+            <div class="larry-login" style="color:white;">
+                 <input type="checkbox" name="remember" value="1"/>记住我
+            </div>
+        {#    <div class="layui-val-icon larry-login">#}
+        {#    	<div class="layui-code-box">#}
+        {#    		<input type="text" id="code" name="code" placeholder="验证码" maxlength="4" class="login_txtbx">#}
+        {#            <img src="images/verifyimg.png" alt="" class="verifyImg" id="verifyImg" onClick="javascript:this.src='xxx'+Math.random();">#}
+        {#    	</div>#}
+        {#    </div>#}
+            <div class="layui-submit larry-login">
+                <input type="submit" value="立即登陆" class="submit_btn"/>
+            </div>
+            {% if message %}
+                <p style="text-align: center; color: palevioletred;">{{ message }}</p>
+            {% endif %}
+        </form>
+        <div class="layui-login-text">
+            <p>© 2016-2017 Larry 版权所有</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ file_name("cms/common/layui/lay/dest/layui.all.js") }}"></script>
+    <script type="text/javascript" src="{{ file_name("cms/js/login.js") }}"></script>
+    <script type="text/javascript" src="{{ file_name("cms/jsplug/jparticle.jquery.js") }}"></script>
+    <script type="text/javascript">
+    $(function(){
+        $(".layui-canvs").jParticle({
+            background: "#141414",
+            color: "#E6E6E6"
+        });
+    });
+    </script>
+{% endblock %}
