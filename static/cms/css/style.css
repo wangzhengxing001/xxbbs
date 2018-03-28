@@ -34,6 +34,7 @@ body{
 }
 .wrap{
 	margin: 0 auto;
+	
 	width: 80%;
 }
 body a,form li,input[type="submit"],input[type="text"],.sixth-login input[type="submit"],.third-login input[type="submit"]{
