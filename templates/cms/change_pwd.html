@@ -1,0 +1,81 @@
+{% extends "common/cms_base.html" %}
+{% block head %}
+    {% block title %}
+        <title>修改密码</title>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ file_name("cms/css/personal.css") }}" media="all">
+{% endblock %}
+{% block body %}
+    <section class="layui-larry-box">
+        <div class="larry-personal">
+            <header class="larry-personal-tit">
+                <span>修改密码</span>
+            </header><!-- /header -->
+            <div class="larry-personal-body clearfix changepwd">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="{{ cms_user.username }}" disabled="disabled" >
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">旧密码</label>
+                        <div class="layui-input-block">
+                            <input type="old_password" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入旧密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码</label>
+                        <div class="layui-input-block">
+                            <input type="new_password" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入新密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">确认密码</label>
+                        <div class="layui-input-block">
+                            <input type="re_new_password" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入确认新密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item change-submit">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" id="submit">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                    {% if message %}
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <p>{{ message }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block foot %}
+    <script type="text/javascript">
+        $(function(){
+            $('#submit').click(function(){
+                console.info("inputttttt");
+                csrf_ajax.post({
+                    url:"{{ url_for("cms.changepwd") }}",
+                    data:{
+                        "old_password":$('input[name="old_password"]').val(),
+                        "new_password":$('input[name="new_password"]').val(),
+                        "re_new_password":$('input[name="re_new_password"]').val(),
+                    },
+                    success:function(data){
+                        console.info(data);
+                    },
+                    error:function (data) {
+                        console.info(data)
+                    }
+                });
+            })
+        });
+        {#layui.use(['form','upload'],function(){#}
+        {#     var form = layui.form();#}
+        {#);#}
+    </script>
+{% endblock %}

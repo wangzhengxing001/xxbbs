@@ -1,8 +1,9 @@
 from flask import Blueprint, request, render_template, url_for, session, redirect, views, g
-from .forms import LoginForm
+from .forms import LoginForm, ChangePwdForm
 from .models import CMSUser
 from .decorators import login_required
 from config import CMS_USER_ID
+from exts import db
 bp = Blueprint("cms", __name__, url_prefix="/cms")
 
 
@@ -45,4 +46,26 @@ class LoginView(views.MethodView):
             return self.get(message=error)
 
 
+class ChangepwdView(views.MethodView):
+    def get(self, message=None):
+        return render_template("cms/change_pwd.html", message= message)
+
+    def post(self):
+        changeForm = ChangePwdForm(request.form)
+        if changeForm.validate():
+            message = "修改成功!"
+            cms_user = g.cms_user # type:CMSUser
+            if cms_user.check_passowrd(changeForm.old_password.data):
+                cms_user.password = changeForm.new_password.data
+                db.session.commit()
+                return self.get(message=message)
+            else:
+                message = "原始密码错误!"
+                return self.get(message=message)
+        else:
+            message = changeForm.errors.popitem()[1][0]
+            return self.get(message=message)
+
+
 bp.add_url_rule("/login/", view_func=LoginView.as_view("login"))
+bp.add_url_rule("/changepwd/", view_func=ChangepwdView.as_view("changepwd"))
