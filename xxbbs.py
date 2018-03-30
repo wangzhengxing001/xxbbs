@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from exts import db
+from exts import db, mail
 import config
 from apps.cms.views import bp as cms_bp
 from apps.common.views import bp as common_bp
@@ -14,6 +14,7 @@ app.register_blueprint(common_bp)
 app.register_blueprint(front_bp)
 app.config.from_object(config)
 db.init_app(app)
+mail.init_app(app)
 
 
 @app.route('/')

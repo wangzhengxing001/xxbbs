@@ -1,0 +1,19 @@
+$(function(){
+    $('#submit').click(function(){
+        csrf_ajax.post({
+            url:"/cms/changepwd/",
+            data:{
+                "old_password":$('input[name="old_password"]').val(),
+                "new_password":$('input[name="new_password"]').val(),
+                "re_new_password":$('input[name="re_new_password"]').val(),
+            },
+            success:function(data){
+                if(data["code"] ==200){
+                    lay_alert.success(data);
+                }else{
+                    lay_alert.param_error(data);
+                }
+            }
+        });
+    })
+});

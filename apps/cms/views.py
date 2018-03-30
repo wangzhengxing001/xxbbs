@@ -3,7 +3,9 @@ from .forms import LoginForm, ChangePwdForm
 from .models import CMSUser
 from .decorators import login_required
 from config import CMS_USER_ID
-from exts import db
+from exts import db, mail
+from utils import restfuls
+from flask_mail import Message
 bp = Blueprint("cms", __name__, url_prefix="/cms")
 
 
@@ -11,6 +13,14 @@ bp = Blueprint("cms", __name__, url_prefix="/cms")
 @login_required
 def index():
     return render_template("cms/index.html")
+
+
+# 测试邮箱
+@bp.route("/sendmail/")
+def send_mail():
+    msg = Message("更改邮箱验证", recipients=["12345465489799999997979s@qq.com"], body="测试邮件!")
+    result = mail.send(msg)
+    return "abc"
 
 
 # 注销功能
@@ -22,6 +32,7 @@ def login_out():
     return redirect(url_for("cms.login"))
 
 
+# 登陆跳转及验证
 class LoginView(views.MethodView):
     def get(self, message=None):
         return render_template("cms/login.html", message=message)
@@ -42,30 +53,38 @@ class LoginView(views.MethodView):
             else:
                 return self.get(message="账号密码不匹配!")
         else:
-            error = loginForm.errors.popitem()[1][0]
+            error = loginForm.get_errors()
             return self.get(message=error)
 
 
+# 修改密码跳转与验证
 class ChangepwdView(views.MethodView):
-    def get(self, message=None):
-        return render_template("cms/change_pwd.html", message= message)
+    def get(self):
+        return render_template("cms/change_pwd.html")
 
     def post(self):
         changeForm = ChangePwdForm(request.form)
         if changeForm.validate():
-            message = "修改成功!"
             cms_user = g.cms_user # type:CMSUser
             if cms_user.check_passowrd(changeForm.old_password.data):
                 cms_user.password = changeForm.new_password.data
                 db.session.commit()
-                return self.get(message=message)
+                return restfuls.success(message="修改成功!")
             else:
-                message = "原始密码错误!"
-                return self.get(message=message)
+                return restfuls.param_error(message="原始密码错误!")
         else:
-            message = changeForm.errors.popitem()[1][0]
-            return self.get(message=message)
+            return restfuls.param_error(message=changeForm.get_errors())
 
 
+# 修改邮箱跳转与验证
+class ChangeMailView(views.MethodView):
+    def get(self):
+        return render_template("cms/change_mail.html")
+
+    def post(self):
+        pass
+
+
+bp.add_url_rule("/changemail/", view_func=ChangeMailView.as_view("changemail"))
 bp.add_url_rule("/login/", view_func=LoginView.as_view("login"))
 bp.add_url_rule("/changepwd/", view_func=ChangepwdView.as_view("changepwd"))

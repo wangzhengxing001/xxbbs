@@ -4,6 +4,15 @@
         <title>修改密码</title>
     {% endblock %}
     <link rel="stylesheet" type="text/css" href="{{ file_name("cms/css/personal.css") }}" media="all">
+    <style>
+        .layui-input{
+            display: inline-block;
+            width: 30%;
+        }
+        .layui-btn{
+            display: inline-block;
+        }
+    </style>
 {% endblock %}
 {% block body %}
     <section class="layui-larry-box">
@@ -13,27 +22,22 @@
             </header><!-- /header -->
             <div class="larry-personal-body clearfix changepwd">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">用户名</label>
+                        <label class="layui-form-label">旧邮箱</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="{{ cms_user.username }}" disabled="disabled" >
+                            <input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="{{ cms_user.email }}" disabled="disabled" >
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">旧密码</label>
+                        <label class="layui-form-label">新邮箱</label>
                         <div class="layui-input-block">
-                            <input type="password" name="old_password"  autocomplete="off"  class="layui-input" value="" placeholder="请输入旧密码">
+                            <input type="text" name="new_password"  autocomplete="off"  class="layui-input" value="" placeholder="请输入新密码">
+                            <button class="layui-btn layui-btn-danger">发送验证码</button>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">新密码</label>
+                        <label class="layui-form-label">填写验证码</label>
                         <div class="layui-input-block">
-                            <input type="password" name="new_password"  autocomplete="off"  class="layui-input" value="" placeholder="请输入新密码">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">确认密码</label>
-                        <div class="layui-input-block">
-                            <input type="password" name="re_new_password"  autocomplete="off"  class="layui-input" value="" placeholder="请输入确认新密码">
+                            <input type="text" name="re_new_password"  autocomplete="off"  class="layui-input" value="" placeholder="请输入确认新密码">
                         </div>
                     </div>
                     <div class="layui-form-item change-submit">
@@ -47,5 +51,5 @@
     </section>
 {% endblock %}
 {% block foot %}
-    <script type="text/javascript" src="{{ file_name("cms/pagejs/change_pwd.js") }}"></script>
+    <script type="text/javascript" src="{{ file_name("cms/pagejs/change_mail.js") }}"></script>
 {% endblock %}

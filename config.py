@@ -12,3 +12,12 @@ import os
 SECRET_KEY = os.urandom(24)
 
 CMS_USER_ID = "cms_user_id"
+
+MAIL_SERVER = "smtp.163.com"
+MAIL_PORT = 994
+# MAIL_USE_TLS = True
+MAIL_USE_SSL = True
+# MAIL_DEBUG = 默认app.debug
+MAIL_USERNAME = "xxbbsAdministrator@163.com"
+MAIL_PASSWORD = "961215xx"
+MAIL_DEFAULT_SENDER = "xxbbsAdministrator@163.com" # ：发送者
